@@ -1,187 +1,316 @@
-Last Update: August 14, 2020
-Authors: Judit Ben Ami & Marina Khizgilov
+# Last Update: August 14, 2020
+
+Authors: Judit Ben Ami &amp; Marina Khizgilov
+
 Created during 2019-2020 as part of a final project towards BSc in biomedical engineering.
+
 TCML lab at the Department of Biomedical Engineering, Technion - IIT, Haifa, Israel
 
 Under the supervision of Dr. Moti Frieman
-Special thanks for Elad Rotman for phantom_simulation function.
 
-IvimParamsEstimLib 
-__________________________________________________________________________________
-IvimParamsEstimLib is a multi-purpose Python library for IVIM parameters estimation. 
-The model used for IVIM–based biexponential analysis is:
-s_i=s_0 (f⋅e^├ -b_i (D^*+D) +(1-f)e^(-b_i D) )
-Where D is the diffusion coefficient, which reflects tissue diffusivity; D* is the pseudo-diffusion coefficient, which reflects microcapillary perfusion; and f is the perfusion fraction.
-This library includes:
-	4 IVIM parameters estimation algorithms: SEGb, SEG, LSQ, BSP.
-	Phantom creating function. 
-	Error calculation functions. 
-In addition, for efficiency and higher performance, the library uses vectorize programming, multiprocessing, assertions and exceptions.
+Special thanks for Elad Rotman for phantom\_simulation function.
 
-IvimParamsEstimLib. dwmri_images_to_ndarray
+#
+## **IvimParamsEstimLib**
 
-dwmri_images_to_ndarray(file_path, b_value, slice_num=0, plot_flag=False, save_plot_flag=False, save_plot_prefix=’001’)
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+# IvimParamsEstimLib is a multi-purpose Python library for IVIM parameters estimation.
+
+# The model used for IVIM–based biexponential analysis is:
+
+Where D is the diffusion coefficient, which reflects tissue diffusivity; D\* is the pseudo-diffusion coefficient, which reflects microcapillary perfusion; and f is the perfusion fraction.
+
+# This library includes:
+
+-
+# 4 IVIM parameters estimation algorithms: SEGb, SEG, LSQ, BSP.
+-
+# Phantom creating function.
+-
+# Error calculation functions.
+
+# In addition, for efficiency and higher performance, the library uses vectorize programming, multiprocessing, assertions and exceptions.
+
+# **IvimParamsEstimLib.**** dwmri\_images\_to\_ndarray**
+
+**dwmri\_images\_to\_ndarray(file\_path, b\_value, slice\_num=0, plot\_flag=False, save\_plot\_flag=False, save\_plot\_prefix=&#39;001&#39;)**
 
 Converts input DW-MRI images to a ndarray.
-Parameters:   file_path : List of PathLike 
+
+**Parameters:**  **file\_path**  **: List of PathLike**
+
 Paths of the DW-MRI images to convert.
-		b-values : ndarray
+
+**b-values : ndarray**
+
 Vector containing the B-values the DW-MRI image was taken at.
-slice_num : integer, optional (0 by default)
+
+**slice\_num** **: integer, optional (0 by default)**
+
 For 3D Images, choose a specific 2D slice.
-plot_flag : boolean, optional (False by default)
-If True, plots the output figure. 
-save_plot_flag : boolean, optional (False by default)
-If True, saves the output figure as a PNG file to current working 	directory.
-save_plot_prefix: str, optional (‘001’ by default)
-	Prefix of the name of the file the figure will be saved as. 
-Returns:	slice: ndarray, shape [b_num, y_wid, x_wid]
-Conversion result matrix. 
+
+**plot\_flag** **: boolean, optional (False by default)**
+
+If True, plots the output figure.
+
+**save\_plot\_flag**** : **** boolean, optional (False by default)**
+
+If True, saves the output figure as a PNG file to current working directory.
+
+**save\_plot\_prefix**** : **** str, optional (&#39;001&#39; by default)**
+
+Prefix of the name of the file the figure will be saved as.
+
+**Returns:**  **slice**** : ndarray, **** shape [****b\_num, y\_wid**** , **** x\_wid****]**
+
+Conversion result matrix.
 
 Notes:
-IvimParamsEstimLib.ivim_params_estim   
 
-ivim_params_estim(dw_mri_images, b, estimator_mode='ALL', image_type_mode='norm', b_tresh=200, plot_flag=True, save_plot_flag=False, save_plot_prefix="001", multi_segs=1, env_size=5, dbg_features=False)
+# **IvimParamsEstimLib.ivim\_params\_estim**
 
-Evaluates the IVIM parameters, D, D* and f. Reconstructs the DW-MRI imaged using the estimated IVIM parameters.
+**ivim\_params\_estim(dw\_mri\_images, b, estimator\_mode=&#39;ALL&#39;, image\_type\_mode=&#39;norm&#39;, b\_tresh=200, plot\_flag=True, save\_plot\_flag=False, save\_plot\_prefix=&quot;001&quot;, multi\_segs=1, env\_size=5, dbg\_features=False)**
 
-Parameters:   dw_mri_images : ndarray, shape [b_num,y_wid, x_wid]
-A 3D matrix consisting of a series of slices of DW-MRI images taken at b_num different b-values.
-			b : ndarray
+Evaluates the IVIM parameters, D, D\* and f. Reconstructs the DW-MRI imaged using the estimated IVIM parameters.
+
+**Parameters:**  **dw\_mri\_images**** : ndarray ****,** **shape [****b\_num,y\_wid ****,**  **x\_wid****]**
+
+A 3D matrix consisting of a series of slices of DW-MRI images taken at b\_num different b-values.
+
+**b : ndarray**
+
 Vector containing the B-values the DW-MRI image was taken at.
-estimator_mode ‘SEGb’, ‘SEG’, ‘LSQ’ or ‘BSP’ ,’ALL’ optional (‘ALL’ by default)
-Type of IVIM parameters estimation algorithm. Choose ‘ALL’ to get estimation results using all the modes: ‘SEGb’, ‘SEG’, ‘LSQ’ or ‘BSP’.
-image_type_mode : ‘norm’ or ‘absolute’, optional (‘absolute’’ by
-default)
-DW-MRI image mode. ‘norm’ if image is normalized, ‘absolute’ if Image is not normalized.
-			b_tresh : integer, optional (200 by default)
-				b-value threshold for SEG/SEGb estimations.
-			plot_flag : boolean, optional (False by default)
-If True, plots the output figures - maps of IVIM parameters and  the reconstructed DW-MRI images.
-save_plot_flag : boolean, optional (False by default)
+
+**estimator\_mode****&#39;SEGb&#39;, &#39;SEG&#39;, &#39;LSQ&#39; or &#39;BSP&#39; ,&#39;ALL&#39; optional (&#39;ALL&#39; by default)**
+
+Type of IVIM parameters estimation algorithm. Choose &#39;ALL&#39; to get estimation results using all the modes: &#39;SEGb&#39;, &#39;SEG&#39;, &#39;LSQ&#39; or &#39;BSP&#39;.
+
+**image\_type\_mode**** : &#39;norm&#39; or &#39;absolute&#39;, optional (&#39;absolute&#39;&#39; by**
+
+**default)**
+
+DW-MRI image mode. &#39;norm&#39; if image is normalized, &#39;absolute&#39; if Image is not normalized.
+
+**b\_tresh : integer, optional (200 by default)**
+
+b-value threshold for SEG/SEGb estimations.
+
+**plot\_flag : boolean, optional (False by default)**
+
+If True, plots the output figures - maps of IVIM parameters and the reconstructed DW-MRI images.
+
+**save\_plot\_flag**** : **** boolean, optional (False by default)**
+
 If True, saves output figures as a PNG files to current working directory.
-save_plot_prefix: str, optional (‘001’ by default)
-Prefix of the name of the files the figures were saved as. 
-multi_segs: integer, optional (8 by default)
+
+**save\_plot\_prefix**** : str, optional (&#39;001&#39; by default)**
+
+Prefix of the name of the files the figures were saved as.
+
+**multi\_segs:** **integer, optional (8 by default)**
+
 For multi-processing implementation. Maximum number of multi-processes.
-env_size: integer, optional (5 by default) 
-For ‘BSP’ mode, number of elements in each direction around a pixel.
-dbg_features : Boolean, optional (False by default)
+
+**env\_size:** **integer, optional (5 by default)**
+
+For &#39;BSP&#39; mode, number of elements in each direction around a pixel.
+
+**dbg\_features** **: Boolean, optional (False by default)**
+
 If True, prints yje number of each iteration and total running time for each method except SEGb.
-	Returns :	<estimator_mode>_estim_D : ndarray (or list for ‘ALL’ estimator)
-				Estimated D map, using <estimator_mode> algorithm.
-<estimator_mode>_estim_D_star : ndarray (or list for ‘ALL’ estimator)
-Estimated D* map, using <estimator_mode> algorithm.
-<estimator_mode>_estim_f : ndarray (or list for ‘ALL’ estimator)
-Estimated f map, using <estimator_mode> algorithm.
-<estimator_mode>_ estim_images : ndarray (or list for ‘ALL’ estimator)
-	Reconstructed images.
 
-Notes: 
-	For shorter running time, more than 1 multi-process is favoured.
-	For ‘ALL’ estimator mode, each return is a list consists the results of:  ‘SEGb’, ‘SEG’, ‘LSQ’, ‘BSP’ in that particular order.
-IvimParamsEstimLib.Phantom_Simulation_DWMRI
+**Returns : \&lt;estimator\_mode\&gt;\_estim\_D : ndarray (or list for &#39;ALL&#39; estimator)**
 
-phantom_simulation(b_val, D_val, D_star_val, Fp_val, B0_val, x_wid=64, y_wid=64, rads=None, noise_type='NaN', SNR=0.1, plot_flag=False, save_plot_flag=False, save_plot_prefix=’001’)
+Estimated D map, using \&lt;estimator\_mode\&gt; algorithm.
 
-Creates IVIM parameters maps and simulates DW-MRI images. The phantoms created consists of N concentric circles. 
+**\&lt;estimator\_mode\&gt;\_estim\_D\_star : ndarray (or list for &#39;ALL&#39; estimator)**
 
-Parameters:   		b-values : ndarray
+Estimated D\* map, using \&lt;estimator\_mode\&gt; algorithm.
+
+**\&lt;estimator\_mode\&gt;\_estim\_f : ndarray (or list for &#39;ALL&#39; estimator)**
+
+Estimated f map, using \&lt;estimator\_mode\&gt; algorithm.
+
+**\&lt;estimator\_mode\&gt;\_**** estim\_images : ndarray (or list for &#39;ALL&#39; estimator)**
+
+Reconstructed images.
+
+Notes:
+
+- For shorter running time, more than 1 multi-process is favoured.
+- For &#39;ALL&#39; estimator mode, each return is a list consists the results of: &#39;SEGb&#39;, &#39;SEG&#39;, &#39;LSQ&#39;, &#39;BSP&#39; in that particular order.
+
+# **IvimParamsEstimLib.Phantom\_Simulation\_DWMRI**
+
+**phantom\_simulation(b\_val, D\_val, D\_star\_val, Fp\_val, B0\_val, x\_wid=64, y\_wid=64, rads=None, noise\_type=&#39;NaN&#39;,****SNR=0.1, plot\_flag=False, save\_plot\_flag=False, save\_plot\_prefix= ****&#39;001&#39;**** )**
+
+Creates IVIM parameters maps and simulates DW-MRI images. The phantoms created consists of N concentric circles.
+
+**Parameters:**  **b-values : ndarray**
+
 Vector containing the b-values for the simulated image.
-D_val : ndarray , shape [N+1,]
+
+**D\_val : ndarray**** , **** shape [****N+1**** ,]**
+
 Vector containing the D values of the simulated image.
-		D_star_val : ndarray, shape [N+1,]
-Vector containing the D* values of the simulated image.
-Fp_val : ndarray, shape [N+1,]
+
+**D\_star\_val : ndarray,** **shape [****N+1****,]**
+
+Vector containing the D\* values of the simulated image.
+
+**Fp\_val : ndarray,** **shape [****N+1****,]**
+
 Vector containing the f values of the simulated image.
-B0_val : ndarray, shape [N+1,]
+
+**B0\_val : ndarray,** **shape [****N+1****,]**
+
 Vector containing the B0 values of the simulated image.
-x_wid : integer, optional (64 by default)
+
+**x\_wid : integer, optional (64 by default)**
+
 Number of pixels at x-axis of simulated image.
-y_wid : integer, optional (64 by default)
-			Number of pixels at y-axis of simulated image.
-			rads : ndarray, shape [N,], optional ([10,20,30] by default)
-				Vector containing the radii of the circles of simulate image.
-				The radii are in ascending order of length, where the value of 				the first index of the vector is the radius of the inner circle, and 
-				Value of the last index of the vector is the radius of the external 				circle.
-noise_type : ‘NaN’, ‘gaussian’, ‘rayleigh’, ‘rice’ or ‘non_centralized_chi2’, optional (‘NaN’ by default)
+
+**y\_wid : integer, optional (64 by default)**
+
+Number of pixels at y-axis of simulated image.
+
+**rads : ndarray,** **shape [****N****,]****, **** optional ([10,20,30] by default)**
+
+Vector containing the radii of the circles of simulate image.
+
+The radii are in ascending order of length, where the value of the first index of the vector is the radius of the inner circle, and
+
+Value of the last index of the vector is the radius of the external circle.
+
+**noise\_type : &#39;NaN&#39;, &#39;gaussian&#39;, &#39;rayleigh&#39;, &#39;rice&#39; or &#39;non\_centralized\_chi2&#39;, optional (&#39;NaN&#39; by default)**
+
 Type of noise to be added to the simulated DW-MRI images.
-SNR : float, optional (0.1 by default)
-	SNR value for noise.
-plot_flags : boolean, optional (False by default)
+
+**SNR**** : float, **** optional (0.1 by default)**
+
+SNR value for noise.
+
+**plot\_flags**  **: boolean,** **optional (False by default)**
+
 If True, plots the output figures – IVIM parameters maps and simulated DW-MRI images.
-save_plot_flag : boolean, optional (False by default)
-If True, saves the output figure as a PNG file to current working 	directory.
-save_plot_prefix: str, optional (‘001’ by default)
-	Name of the file the figure was saved as. 
 
+**save\_plot\_flag**** : **** boolean, optional (False by default)**
 
-Returns:	dwi_images : ndarray, shape [b_num,y_wid, x_wid]	
-			Simulated DW-MRI images.
-		B0_phantom : ndarray, shape [y_wid, x_wid]
+If True, saves the output figure as a PNG file to current working directory.
+
+**save\_plot\_prefix**** : str, optional (&#39;001&#39; by default)**
+
+Name of the file the figure was saved as.
+
+**Returns: dwi\_images : ndarray,** **shape [****b\_num,y\_wid ****,**  **x\_wid****]**
+
+Simulated DW-MRI images.
+
+**B0\_phantom :**** ndarray, **** shape [****y\_wid**** , **** x\_wid****]**
+
 Initial simulated DW-MRI image taken at b=0.
-		D_phantom : ndarray, shape [y_wid, x_wid]
-			Simulated D map.
-D_star_phantom: ndarray, shape [y_wid, x_wid]
-Simulated D* map.
-Fp_phantom : ndarray, shape [y_wid, x_wid]
+
+**D\_phantom : ndarray,** **shape [****y\_wid ****,**  **x\_wid****]**
+
+Simulated D map.
+
+**D\_star\_phantom: ndarray,** **shape [****y\_wid ****,**  **x\_wid****]**
+
+Simulated D\* map.
+
+**Fp\_phantom**** : ndarray, **** shape [****y\_wid**** , **** x\_wid****]**
+
 Simulated f map.
 
-Notes: 
-	As mentioned, D_val, D_star_val,  Fp_val, B0_val vectors are the size of N+1. The elements of each vector are ordered according to circles locations:
+Notes:
+
+- As mentioned, D\_val, D\_star\_val, Fp\_val,B0\_valvectors are the size of N+1. The elements of each vector are ordered according to circles locations:
+
 The first element of each vector represents the inner circle and each element that comes afterwards represents the next circle. Last element of the vectors represents the background of the phantom.
 
-IvimParamsEstimLib.error_estim_ivim_maps
+# **IvimParamsEstimLib.error\_estim\_ivim\_maps**
 
-error_estim_ivim_maps(dw_mri_images, b_val, known_D, known_D_star, known_f, estim_D, estim_D_star, estim_f, error_type='perc')
+**error\_estim\_ivim\_maps(dw\_mri\_images, b\_val, known\_D, known\_D\_star, known\_f, estim\_D, estim\_D\_star, estim\_f, error\_type=&#39;perc&#39;)**
 
-Computes the error between simulated IVIM parameters maps and estimated IVIM parameters maps. 
+Computes the error between simulated IVIM parameters maps and estimated IVIM parameters maps.
 
-Parameters:  	 dw_mri_images: ndarray, shape [b_num,y_wid, x_wid]	
-A 3D matrix consisting of a series of slices of DW-MRI images taken at b_num different b-values.
-		b-val : ndarray
+**Parameters: dw\_mri\_images: ndarray,** **shape [****b\_num,y\_wid ****,**  **x\_wid****]**
+
+A 3D matrix consisting of a series of slices of DW-MRI images taken at b\_num different b-values.
+
+**b-val : ndarray**
+
 Vector containing the B-values the DW-MRI image was taken at.
-known_D : ndarray, shape [y_wid, x_wid]
+
+**known\_D : ndarray,** **shape [****y\_wid ****,**  **x\_wid****]**
+
 Simulated D map.
-known_D_star : ndarray, shape [y_wid, x_wid]
-Simulated D* map.
-known_f : ndarray, shape [y_wid, x_wid]
+
+**known\_D\_star : ndarray,** **shape [****y\_wid ****,**  **x\_wid****]**
+
+Simulated D\* map.
+
+**known\_f**  **:**  **ndarray,** **shape [****y\_wid ****,**  **x\_wid****]**
+
 Simulated f map.
-estim_D: ndarray, shape [y_wid, x_wid]
+
+**estim\_D**** : **** ndarray, **** shape [****y\_wid**** , **** x\_wid****]**
+
 Estimated D map.
-estim_D_star: ndarray, shape [y_wid, x_wid]
-Estimated D* map.
-estim_f: ndarray, shape [y_wid, x_wid]
+
+**estim\_D\_star**** : **** ndarray, **** shape [****y\_wid**** , **** x\_wid****]**
+
+Estimated D\* map.
+
+**estim\_f**** : **** ndarray, **** shape [****y\_wid**** , **** x\_wid****]**
+
 Estimated f map.
-error_type: ‘l1’, ‘l2’ or ‘perc’ (‘perc’ by default)
-	Type of error calculation. 
-Returns:	D_error : float
+
+**error\_type**** : ****&#39;l1&#39;, &#39;l2&#39; or &#39;perc&#39; (&#39;perc&#39; by default)**
+
+Type of error calculation.
+
+**Returns: D\_error : float**
+
 Calculated error between known (e.g. simulated) D map and estimated D map.
-D_star_error : float
-Calculated error between known (e.g. simulated) D* map and estimated D* map.
-f_error: float
+
+**D\_star\_error : float**
+
+Calculated error between known (e.g. simulated) D\* map and estimated D\* map.
+
+**f\_error: float**
+
 Calculated error between known (e.g. simulated) f map and estimated f map.
-             			mean_error : float
- Mean of calculated IVIM parameters maps errors.
+
+**mean\_error : float**
+
+Mean of calculated IVIM parameters maps errors.
+
 Notes:
 
-IvimParamsEstimLib.error_estim_dw_images
+# **IvimParamsEstimLib.error\_estim\_dw\_images**
 
-error_estim_dw_images(orig_dw_mri_images, rec_dw_mri_images, b_val, error_type='perc')
+**error\_estim\_dw\_images(orig\_dw\_mri\_images, rec\_dw\_mri\_images, b\_val, error\_type=&#39;perc&#39;)**
 
-Computes the error between original DW-MRI images and  reconstructed DW-MRI images obtained from IVIM estimation function.
+Computes the error between original DW-MRI images and reconstructed DW-MRI images obtained from IVIM estimation function.
 
-Parameters:  	 orig_dw_mri_images : ndarray, shape [b_num,y_wid, x_wid]	
-A 3D matrix consisting of a series of slices of DW-MRI images taken at b_num different b-values.
-		rec_dw_mri_images : ndarray, shape [b_num,y_wid, x_wid]	
-A 3D matrix consisting of a series of slices of reconstructed DW-MRI images taken at b_num different b-values.
-		b-val : ndarray
+**Parameters: orig\_dw\_mri\_images : ndarray,** **shape [****b\_num,y\_wid ****,**  **x\_wid****]**
+
+A 3D matrix consisting of a series of slices of DW-MRI images taken at b\_num different b-values.
+
+**rec\_dw\_mri\_images : ndarray,** **shape [****b\_num,y\_wid ****,**  **x\_wid****]**
+
+A 3D matrix consisting of a series of slices of reconstructed DW-MRI images taken at b\_num different b-values.
+
+**b-val : ndarray**
+
 Vector containing the B-values the DW-MRI image was taken at.
-error_type: ‘l1’, ‘l2’ or ‘perc’ (‘perc’ by default)
-	Type of error calculation. 
-Returns:	< error_type >_error : float
-Calculated error between known DW-MRI images and reconstructed DW-MRI images obtained from IVIM estimation function. (Phantom_Simulation_DWMRI)
 
+**error\_type**** : ****&#39;l1&#39;, &#39;l2&#39; or &#39;perc&#39; (&#39;perc&#39; by default)**
 
+Type of error calculation.
 
+**Returns:**  **\&lt;**  **error\_type**  **\&gt;\_error : float**
 
+Calculated error between known DW-MRI images and reconstructed DW-MRI images obtained from IVIM estimation function. ([Phantom\_Simulation\_DWMRI](#ivim_estim_func_bookmark))
