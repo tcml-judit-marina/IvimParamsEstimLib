@@ -39,7 +39,7 @@ vectorize programming, multiprocessing, assertions and exceptions.
 **IvimParamsEstimLib. dwmri_images_to_ndarray**
 ===============================================
 
-**dwmri_images_to_ndarray(file_path, b_value, slice_num=0,
+'**dwmri_images_to_ndarray(file_path, b_value, slice_num=0,
 plot_flag=False, save_plot_flag=False, save_plot_prefix='001')**
 
 Converts input DW-MRI images to a ndarray.
@@ -58,7 +58,7 @@ Converts input DW-MRI images to a ndarray.
 >
 > **plot_flag : boolean, optional (False by default)**
 >
-> If True, plots the output figure.
+>               If True, plots the output figure.
 >
 > **save_plot_flag : boolean, optional (False by default)**
 >
