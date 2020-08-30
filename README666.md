@@ -72,7 +72,7 @@ For multi-processing implementation. Maximum number of multi-processes.
 **env_size: integer, optional (5 by default)**  
 For ‘BSP’ mode, number of elements in each direction around a pixel. 
 
-# Returns :
+###### Returns:
 **<estimator_mode>_estim_D : ndarray (or list for ‘ALL’ estimator)**  
 Estimated D map, using <estimator_mode> algorithm.  
 **<estimator_mode>_estim_D_star : ndarray (or list for ‘ALL’ estimator)**  
