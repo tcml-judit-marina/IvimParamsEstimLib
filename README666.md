@@ -46,7 +46,7 @@ Conversion result matrix.
 
 ### IvimParamsEstimLib.ivim_params_estim   
 
-**ivim_params_estim(dw_mri_images, b, estimator_mode='ALL', image_type_mode='norm', b_tresh=200, plot_flag=True, save_plot_flag=False, save_plot_prefix="001", multi_segs=1, env_size=5, dbg_features=False)**
+**ivim_params_estim(dw_mri_images, b, sim_flag, estimator_mode='ALL', image_type_mode='norm', b_tresh=200, plot_flag=True, save_plot_flag=False, save_plot_prefix="001", multi_segs=1, env_size=5, dbg_features=False)**
 
 Evaluates the IVIM parameters, D, D* and f. Reconstructs the DW-MRI imaged using the estimated IVIM parameters.
 
@@ -55,6 +55,8 @@ Evaluates the IVIM parameters, D, D* and f. Reconstructs the DW-MRI imaged using
 A 3D matrix consisting of a series of slices of DW-MRI images taken at b_num different b-values.  
 **b : ndarray**  
 Vector containing the B-values the DW-MRI image was taken at.  
+**sim_flag : boolean, optional (False by default)**  
+If True, the input images are from simulation meaning every pixel comes from IVIM bi-exponential model. Else (if False) the input images are real clinical DW-MRI images.  
 **estimator_mode ‘SEGb’, ‘SEG’, ‘LSQ’ or ‘BSP’ ,’ALL’ optional (‘ALL’ by default)**  
 Type of IVIM parameters estimation algorithm. Choose ‘ALL’ to get estimation results using all the modes: ‘SEGb’, ‘SEG’, ‘LSQ’ or ‘BSP’.  
 **image_type_mode : ‘norm’ or ‘absolute’, optional (‘absolute’’ by default)**  
