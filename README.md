@@ -10,10 +10,9 @@ Under the supervision of Dr. Moti Frieman
 
 Special thanks for Elad Rotman for phantom_simulation function.
 
-**IvimParamsEstimLib**
-
 ===============================================
 
+###### IvimParamsEstimLiby
 IvimParamsEstimLib is a multi-purpose Python library for IVIM parameters
 estimation.
 
