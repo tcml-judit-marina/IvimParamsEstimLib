@@ -12,7 +12,7 @@ Special thanks for Elad Rotman for phantom_simulation function.
 
 **IvimParamsEstimLib**
 
-\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+===============================================
 
 IvimParamsEstimLib is a multi-purpose Python library for IVIM parameters
 estimation.
