@@ -40,7 +40,7 @@ If True, saves the output figure as a PNG file to current working 	directory.
 Prefix of the name of the file the figure will be saved as.  
 
 ###### Returns:
-** slice: ndarray, shape [b_num, y_wid, x_wid]**  
+**slice: ndarray, shape [b_num, y_wid, x_wid]**  
 Conversion result matrix.  
 
 
