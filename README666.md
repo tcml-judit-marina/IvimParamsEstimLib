@@ -24,6 +24,7 @@ In addition, for efficiency and higher performance, the library uses vectorize p
 **dwmri_images_to_ndarray(file_path, b_value, slice_num=0, plot_flag=False, save_plot_flag=False, save_plot_prefix=’001’)**
 
 Converts input DW-MRI images to a ndarray.  
+
 ###### Parameters:  
 **file_path : List of PathLike**  
 Paths of the DW-MRI images to convert.  
@@ -38,7 +39,7 @@ If True, saves the output figure as a PNG file to current working 	directory.
 **save_plot_prefix: str, optional (‘001’ by default)**  
 Prefix of the name of the file the figure will be saved as.  
 
-# Returns:
+###### Returns:
 ** slice: ndarray, shape [b_num, y_wid, x_wid]**  
 Conversion result matrix.  
 
@@ -170,7 +171,6 @@ Calculated error between known (e.g. simulated) f map and estimated f map.
 **mean_error : float**  
  Mean of calculated IVIM parameters maps errors.  
  
-Notes:
 
 ### IvimParamsEstimLib.error_estim_dw_images
 
