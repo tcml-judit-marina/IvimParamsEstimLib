@@ -38,7 +38,8 @@ If True, saves the output figure as a PNG file to current working 	directory.
 **save_plot_prefix: str, optional (‘001’ by default)**  
 Prefix of the name of the file the figure will be saved as.  
 
-#Returns:	slice: ndarray, shape [b_num, y_wid, x_wid]**  
+# Returns:
+** slice: ndarray, shape [b_num, y_wid, x_wid]**  
 Conversion result matrix.  
 
 
@@ -70,7 +71,8 @@ For multi-processing implementation. Maximum number of multi-processes.
 **env_size: integer, optional (5 by default)**  
 For ‘BSP’ mode, number of elements in each direction around a pixel. 
 
-#Returns :	<estimator_mode>_estim_D : ndarray (or list for ‘ALL’ estimator)**  
+# Returns :
+**<estimator_mode>_estim_D : ndarray (or list for ‘ALL’ estimator)**  
 Estimated D map, using <estimator_mode> algorithm.  
 **<estimator_mode>_estim_D_star : ndarray (or list for ‘ALL’ estimator)**  
 Estimated D* map, using <estimator_mode> algorithm.  
@@ -90,7 +92,7 @@ Notes:
 
 Creates IVIM parameters maps and simulates DW-MRI images. The phantoms created consists of N concentric circles.
 
-#Parameters:  
+###### Parameters:  
 **b-values : ndarray**  
 Vector containing the b-values for the simulated image.  
 **D_val : ndarray , shape [N+1,]**  
@@ -118,7 +120,7 @@ If True, saves the output figure as a PNG file to current working directory.
 **save_plot_prefix: str, optional (‘001’ by default)**
 Name of the file the figure was saved as.  
 
-#Returns:	
+###### Returns:  
 **dwi_images : ndarray, shape [b_num,y_wid, x_wid]**  
 Simulated DW-MRI images.  
 **B0_phantom : ndarray, shape [y_wid, x_wid]**  
@@ -139,7 +141,7 @@ As mentioned, D_val, D_star_val,  Fp_val, B0_val vectors are the size of N+1. Th
 
 Computes the error between simulated IVIM parameters maps and estimated IVIM parameters maps. 
 
-#Parameters:  	 
+###### Parameters:  
 **dw_mri_images: ndarray, shape [b_num,y_wid, x_wid]**  
 A 3D matrix consisting of a series of slices of DW-MRI images taken at b_num different b-values.  
 **b-val : ndarray**  
@@ -158,7 +160,7 @@ Estimated D* map.
 Estimated f map.  
 **error_type: ‘l1’, ‘l2’ or ‘perc’ (‘perc’ by default)**
 Type of error calculation.  
-#Returns:	
+###### Returns:  	
 **D_error : float**  
 Calculated error between known (e.g. simulated) D map and estimated D map.  
 **D_star_error : float**  
@@ -176,7 +178,7 @@ Notes:
 
 Computes the error between original DW-MRI images and  reconstructed DW-MRI images obtained from IVIM estimation function.
 
-#Parameters:
+###### Parameters:  
 **orig_dw_mri_images : ndarray, shape [b_num,y_wid, x_wid]**  
 A 3D matrix consisting of a series of slices of DW-MRI images taken at b_num different b-values.  
 **rec_dw_mri_images : ndarray, shape [b_num,y_wid, x_wid]**  
@@ -185,7 +187,7 @@ A 3D matrix consisting of a series of slices of reconstructed DW-MRI images take
 Vector containing the B-values the DW-MRI image was taken at.  
 **error_type: ‘l1’, ‘l2’ or ‘perc’ (‘perc’ by default)**  
 Type of error calculation.  
-#Returns:
+###### Returns:  
 **< error_type >_error : float**  
 Calculated error between known DW-MRI images and reconstructed DW-MRI images obtained from IVIM estimation function. (Phantom_Simulation_DWMRI)  
 
