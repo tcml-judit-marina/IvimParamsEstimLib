@@ -58,7 +58,7 @@ A 3D matrix consisting of a series of slices of DW-MRI images taken at b_num dif
 **b : ndarray**  
 Vector containing the B-values the DW-MRI image was taken at.  
 **sim_flag : boolean, optional (False by default)**  
-If True, the input images are from simulation meaning every pixel comes from IVIM bi-exponential model. Else (if False) the input images are real clinical DW-MRI images.  
+If True, the input images are from simulation meaning every pixel comes from IVIM bi-exponential model. Else (if False) the input images are clinical DW-MRI images.  
 **estimator_mode ‘SEGb’, ‘SEG’, ‘LSQ’ or ‘BSP’ ,’ALL’ optional (‘ALL’ by default)**  
 Type of IVIM parameters estimation algorithm. Choose ‘ALL’ to get estimation results using all the modes: ‘SEGb’, ‘SEG’, ‘LSQ’ or ‘BSP’.  
 **image_type_mode : ‘norm’ or ‘absolute’, optional (‘absolute’’ by default)**  
@@ -190,7 +190,7 @@ A 3D matrix consisting of a series of slices of reconstructed DW-MRI images take
 **b-val : ndarray**  
 Vector containing the B-values the DW-MRI image was taken at.  
 **sim_flag : float**  
-If True, the input images are from simulation meaning every pixel comes from IVIM bi-exponential model. Else (if False) the input images are real clinical DW-MRI images.  
+If True, the input images are from simulation meaning every pixel comes from IVIM bi-exponential model. Else (if False) the input images are clinical DW-MRI images.  
 **error_type: ‘l1’, ‘l2’ or ‘perc’ (‘perc’ by default)**  
 Type of error calculation.  
 ###### Returns:  
