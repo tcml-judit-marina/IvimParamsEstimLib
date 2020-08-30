@@ -10,7 +10,9 @@ Special thanks for Elad Rotman for phantom_simulation function.
 
 IvimParamsEstimLib is a multi-purpose Python library for IVIM parameters estimation.  
 The model used for IVIM–based biexponential analysis is:  
-s_i=s_0 (f⋅e^├ -b_i (D^*+D) +(1-f)e^(-b_i D) )  
+
+s<sub>i</sub>=s<sub>0</sub>⋅f⋅e<sup>-b<sub>i</sub>*(D\*+D)</sup>-b<sub>i</sub>*(D\*+D) +(1-f)⋅e<sup>(-b<sub>i</sub>⋅D)</sup>
+
 Where D is the diffusion coefficient, which reflects tissue diffusivity; D\* is the pseudo-diffusion coefficient, which reflects microcapillary perfusion; and f is the perfusion fraction.  
 This library includes:  
  - 4 IVIM parameters estimation algorithms: SEGb, SEG, LSQ, BSP.  
@@ -176,7 +178,7 @@ Calculated error between known (e.g. simulated) f map and estimated f map.
 
 ### IvimParamsEstimLib.error_estim_dw_images
 
-**error_estim_dw_images(orig_dw_mri_images, rec_dw_mri_images, b_val, error_type='perc')**
+**error_estim_dw_images(orig_dw_mri_images, rec_dw_mri_images, b_val, sim_flag, error_type='perc')**
 
 Computes the error between original DW-MRI images and  reconstructed DW-MRI images obtained from IVIM estimation function.
 
@@ -187,6 +189,8 @@ A 3D matrix consisting of a series of slices of DW-MRI images taken at b_num dif
 A 3D matrix consisting of a series of slices of reconstructed DW-MRI images taken at b_num different b-values.  
 **b-val : ndarray**  
 Vector containing the B-values the DW-MRI image was taken at.  
+**sim_flag : float**  
+If True, the input images are from simulation meaning every pixel comes from IVIM bi-exponential model. Else (if False) the input images are real clinical DW-MRI images.  
 **error_type: ‘l1’, ‘l2’ or ‘perc’ (‘perc’ by default)**  
 Type of error calculation.  
 ###### Returns:  
